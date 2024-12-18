@@ -1,0 +1,33 @@
+name: CI Pipeline
+
+on:
+  [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        env: 
+          BROWSERSTACK_USER: ${{vars.BROWSERSTACK_USER}}
+          BROWSERSTACK_KEY: ${{secrets.BROWSERSTACK_KEY}}
+        run: npx wdio config/wdio.android.bs.conf.ts  --spec ./test/specs/android-findElements.spec.ts
+
+      - name: Upload Test Reports on Failure
+        if: failure() # Executes only if a previous step failed
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: ./test-reports/  
