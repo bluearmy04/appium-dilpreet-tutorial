@@ -16,5 +16,5 @@ export const config: WebdriverIO.Config = {
             'appium:autoGrantPermissions': true,
         },
     ],
-    services: ['appium']
+    services: [['appium', {args:{relaxedSecurity: true,}}]]
 };

@@ -6,7 +6,7 @@ describe('To-do item list', ()=>{
         const toDoList = new ToDoListScreen()
         const toDoItem = new ToDoItemScreen()
         const listTitle = 'Daily to-do list'
-        const itemTitle = 'Buy Jersy'
+        const itemTitle = 'Buy Jersey'
         
         await toDoList.createNewList(listTitle)
         await toDoList.openFirstList()
