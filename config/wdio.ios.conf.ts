@@ -6,6 +6,7 @@ export const config: WebdriverIO.Config = {
     ...sharedConfig,
     port: 4723,
     specs: ['../test/specs/ios/ios-todo-item.spec.ts'],
+    //specs: ['../test/specs/ios/webview.spec.ts'],
     capabilities: [
         {
             'appium:platformName': 'iOS',
@@ -14,6 +15,13 @@ export const config: WebdriverIO.Config = {
             'appium:automationName': 'XCUITest',
             'appium:app': path.join(process.cwd(), 'app/ios/MVCTodo.app'),
         },
+        // {
+        //     'appium:platformName': 'iOS',
+        //     'appium:platformVersion': '18.1',
+        //     'appium:deviceName': 'iPhone 16 Pro Max',
+        //     'appium:automationName': 'XCUITest',
+        //     'appium:app': path.join(process.cwd(), 'app/ios/wdiodemoapp.app'),
+        // },
     ],
-    services: ['appium']
+    services: [['appium', {args:{relaxedSecurity: true,}}]]
 };
